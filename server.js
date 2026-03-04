@@ -6,11 +6,13 @@ const PORT = process.env.PORT || 3000;
 
 /* Single Linked List */
 app.get("/sll", (req, res) => {
-res.send(`
+  res.send(`
+
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node {
+struct node
+{
     int data;
     struct node *next;
 };
@@ -18,42 +20,48 @@ struct node {
 struct node *head = NULL;
 
 /* Insert at beginning */
-void insert_begin(int val) {
-    struct node *newnode = (struct node*)malloc(sizeof(struct node));
+void insert_begin(int val)
+{
+    struct node *newnode = (struct node *)malloc(sizeof(struct node));
     newnode->data = val;
     newnode->next = head;
     head = newnode;
 }
 
 /* Insert at end */
-void insert_end(int val) {
-    struct node *newnode = (struct node*)malloc(sizeof(struct node));
+void insert_end(int val)
+{
+    struct node *newnode = (struct node *)malloc(sizeof(struct node));
     struct node *temp = head;
 
     newnode->data = val;
     newnode->next = NULL;
 
-    if(head == NULL) {
+    if (head == NULL)
+    {
         head = newnode;
         return;
     }
 
-    while(temp->next != NULL)
+    while (temp->next != NULL)
         temp = temp->next;
 
     temp->next = newnode;
 }
 
 /* Insert at position */
-void insert_pos(int val, int pos) {
-    struct node *newnode = (struct node*)malloc(sizeof(struct node));
+void insert_pos(int val, int pos)
+{
+    struct node *newnode = (struct node *)malloc(sizeof(struct node));
     struct node *temp = head;
 
     newnode->data = val;
 
-    for(int i = 1; i < pos-1; i++) {
-        if(temp == NULL) {
-            printf("Invalid position\n");
+    for (int i = 1; i < pos - 1; i++)
+    {
+        if (temp == NULL)
+        {
+            printf("Invalid position");
             return;
         }
         temp = temp->next;
@@ -64,9 +72,11 @@ void insert_pos(int val, int pos) {
 }
 
 /* Delete from beginning */
-void delete_begin() {
-    if(head == NULL) {
-        printf("List is empty\n");
+void delete_begin()
+{
+    if (head == NULL)
+    {
+        printf("List is empty");
         return;
     }
 
@@ -76,21 +86,24 @@ void delete_begin() {
 }
 
 /* Delete from end */
-void delete_end() {
-    if(head == NULL) {
-        printf("List empty\n");
+void delete_end()
+{
+    if (head == NULL)
+    {
+        printf("List empty");
         return;
     }
 
     struct node *temp = head;
 
-    if(head->next == NULL) {
+    if (head->next == NULL)
+    {
         free(head);
         head = NULL;
         return;
     }
 
-    while(temp->next->next != NULL)
+    while (temp->next->next != NULL)
         temp = temp->next;
 
     free(temp->next);
@@ -98,27 +111,32 @@ void delete_end() {
 }
 
 /* Delete at position */
-void delete_pos(int pos) {
+void delete_pos(int pos)
+{
 
-    if(head == NULL) {
-        printf("List empty\n");
+    if (head == NULL)
+    {
+        printf("List empty");
         return;
     }
 
     struct node *temp = head;
 
-    for(int i = 1; i < pos-1; i++) {
+    for (int i = 1; i < pos - 1; i++)
+    {
         temp = temp->next;
-        if(temp == NULL) {
-            printf("Invalid position\n");
+        if (temp == NULL)
+        {
+            printf("Invalid position");
             return;
         }
     }
 
     struct node *del = temp->next;
 
-    if(del == NULL) {
-        printf("Invalid position\n");
+    if (del == NULL)
+    {
+        printf("Invalid position");
         return;
     }
 
@@ -127,13 +145,15 @@ void delete_pos(int pos) {
 }
 
 /* Reverse linked list */
-void reverse() {
+void reverse()
+{
 
     struct node *prev = NULL;
     struct node *current = head;
     struct node *next = NULL;
 
-    while(current != NULL) {
+    while (current != NULL)
+    {
 
         next = current->next;
         current->next = prev;
@@ -145,102 +165,107 @@ void reverse() {
 }
 
 /* Display list */
-void display() {
+void display()
+{
 
     struct node *temp = head;
 
-    if(temp == NULL) {
-        printf("List empty\n");
+    if (temp == NULL)
+    {
+        printf("List empty");
         return;
     }
 
-    while(temp != NULL) {
+    while (temp != NULL)
+    {
         printf("%d -> ", temp->data);
         temp = temp->next;
     }
 
-    printf("NULL\n");
+    printf("NULL");
 }
 
 /* Main menu */
-int main() {
+int main()
+{
 
     int choice, val, pos;
 
-    while(1) {
+    while (1)
+    {
 
-        printf("\n------ Single Linked List ------\n");
-        printf("1. Insert at Beginning\n");
-        printf("2. Insert at End\n");
-        printf("3. Insert at Position\n");
-        printf("4. Delete from Beginning\n");
-        printf("5. Delete from End\n");
-        printf("6. Delete from Position\n");
-        printf("7. Reverse List\n");
-        printf("8. Display\n");
-        printf("9. Exit\n");
+        printf("------ Single Linked List ------");
+        printf("1. Insert at Beginning");
+        printf("2. Insert at End");
+        printf("3. Insert at Position");
+        printf("4. Delete from Beginning");
+        printf("5. Delete from End");
+        printf("6. Delete from Position");
+        printf("7. Reverse List");
+        printf("8. Display");
+        printf("9. Exit");
 
         printf("Enter choice: ");
         scanf("%d", &choice);
 
-        switch(choice) {
+        switch (choice)
+        {
 
-            case 1:
-                printf("Enter value: ");
-                scanf("%d", &val);
-                insert_begin(val);
-                break;
+        case 1:
+            printf("Enter value: ");
+            scanf("%d", &val);
+            insert_begin(val);
+            break;
 
-            case 2:
-                printf("Enter value: ");
-                scanf("%d", &val);
-                insert_end(val);
-                break;
+        case 2:
+            printf("Enter value: ");
+            scanf("%d", &val);
+            insert_end(val);
+            break;
 
-            case 3:
-                printf("Enter value and position: ");
-                scanf("%d %d", &val, &pos);
-                insert_pos(val, pos);
-                break;
+        case 3:
+            printf("Enter value and position: ");
+            scanf("%d %d", &val, &pos);
+            insert_pos(val, pos);
+            break;
 
-            case 4:
-                delete_begin();
-                break;
+        case 4:
+            delete_begin();
+            break;
 
-            case 5:
-                delete_end();
-                break;
+        case 5:
+            delete_end();
+            break;
 
-            case 6:
-                printf("Enter position: ");
-                scanf("%d", &pos);
-                delete_pos(pos);
-                break;
+        case 6:
+            printf("Enter position: ");
+            scanf("%d", &pos);
+            delete_pos(pos);
+            break;
 
-            case 7:
-                reverse();
-                printf("List reversed\n");
-                break;
+        case 7:
+            reverse();
+            printf("List reversed");
+            break;
 
-            case 8:
-                display();
-                break;
+        case 8:
+            display();
+            break;
 
-            case 9:
-                exit(0);
+        case 9:
+            exit(0);
 
-            default:
-                printf("Invalid choice\n");
+        default:
+            printf("Invalid choice");
         }
     }
 }
 `);
 });
 
-
 /* Doubly Linked List */
 app.get("/dll", (req, res) => {
-res.send(`
+  res.send(`
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -503,7 +528,7 @@ int main() {
 
 /* Stack */
 app.get("/cll", (req, res) => {
-res.send(`
+  res.send(`
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -754,11 +779,9 @@ int main(){
 `);
 });
 
-
-
 /* Stack using array */
 app.get("/stack-sa", (req, res) => {
-res.send(`
+  res.send(`
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -902,7 +925,7 @@ int main(){
 
 /* Stack Using Dynamic Array*/
 app.get("/stack-da", (req, res) => {
-res.send(`
+  res.send(`
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -1050,7 +1073,7 @@ int main(){
 
 /* Stack Using Linked List */
 app.get("/stack-ll", (req, res) => {
-res.send(`
+  res.send(`
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -1210,10 +1233,9 @@ int main() {
 `);
 });
 
-
 /* Queue Using Static Array */
 app.get("/queue-sa", (req, res) => {
-res.send(`
+  res.send(`
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -1362,7 +1384,7 @@ int main() {
 
 /* Queue Using Dynamic Array */
 app.get("/queue-da", (req, res) => {
-res.send(`
+  res.send(`
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -1516,7 +1538,7 @@ int main() {
 
 /* Queue Using Linked List */
 app.get("/queue-ll", (req, res) => {
-res.send(`
+  res.send(`
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -1692,7 +1714,7 @@ int main(){
 });
 /* Queue */
 app.get("/queue", (req, res) => {
-res.send(`
+  res.send(`
 #include<stdio.h>
 #define MAX 5
 
@@ -1728,7 +1750,7 @@ int main(){
 
 /* Circular Queue Using Array */
 app.get("/queue-cl", (req, res) => {
-res.send(`
+  res.send(`
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -1895,7 +1917,7 @@ int main() {
 
 /* Binary Tree Traversal */
 app.get("/binary-tree", (req, res) => {
-res.send(`
+  res.send(`
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -2015,19 +2037,22 @@ int main() {
 
 /* Menu Driven Binary Search Tree */
 app.get("/bst", (req, res) => {
-res.send(`
+  res.send(`
+
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node {
+struct node
+{
     int data;
     struct node *left;
     struct node *right;
 };
 
 /* Create new node */
-struct node* createNode(int val) {
-    struct node *newnode = (struct node*)malloc(sizeof(struct node));
+struct node *createNode(int val)
+{
+    struct node *newnode = (struct node *)malloc(sizeof(struct node));
 
     newnode->data = val;
     newnode->left = NULL;
@@ -2037,27 +2062,29 @@ struct node* createNode(int val) {
 }
 
 /* Insert into BST */
-struct node* insert(struct node *root, int val) {
+struct node *insert(struct node *root, int val)
+{
 
-    if(root == NULL)
+    if (root == NULL)
         return createNode(val);
 
-    if(val < root->data)
+    if (val < root->data)
         root->left = insert(root->left, val);
 
-    else if(val > root->data)
+    else if (val > root->data)
         root->right = insert(root->right, val);
 
     return root;
 }
 
 /* Search in BST */
-struct node* search(struct node *root, int key) {
+struct node *search(struct node *root, int key)
+{
 
-    if(root == NULL || root->data == key)
+    if (root == NULL || root->data == key)
         return root;
 
-    if(key < root->data)
+    if (key < root->data)
         return search(root->left, key);
 
     else
@@ -2065,35 +2092,40 @@ struct node* search(struct node *root, int key) {
 }
 
 /* Find minimum value node */
-struct node* findMin(struct node *root) {
+struct node *findMin(struct node *root)
+{
 
-    while(root->left != NULL)
+    while (root->left != NULL)
         root = root->left;
 
     return root;
 }
 
 /* Delete node from BST */
-struct node* deleteNode(struct node *root, int key) {
+struct node *deleteNode(struct node *root, int key)
+{
 
-    if(root == NULL)
+    if (root == NULL)
         return root;
 
-    if(key < root->data)
+    if (key < root->data)
         root->left = deleteNode(root->left, key);
 
-    else if(key > root->data)
+    else if (key > root->data)
         root->right = deleteNode(root->right, key);
 
-    else {
+    else
+    {
 
-        if(root->left == NULL) {
+        if (root->left == NULL)
+        {
             struct node *temp = root->right;
             free(root);
             return temp;
         }
 
-        else if(root->right == NULL) {
+        else if (root->right == NULL)
+        {
             struct node *temp = root->left;
             free(root);
             return temp;
@@ -2110,9 +2142,11 @@ struct node* deleteNode(struct node *root, int key) {
 }
 
 /* Inorder Traversal */
-void inorder(struct node *root) {
+void inorder(struct node *root)
+{
 
-    if(root != NULL) {
+    if (root != NULL)
+    {
         inorder(root->left);
         printf("%d ", root->data);
         inorder(root->right);
@@ -2120,14 +2154,16 @@ void inorder(struct node *root) {
 }
 
 /* Main Menu */
-int main() {
+int main()
+{
 
     struct node *root = NULL;
     int choice, val;
 
-    while(1) {
+    while (1)
+    {
 
-        printf("\n------ Binary Search Tree Menu ------\n");
+        printf("------ Binary Search Tree Menu ------\n");
         printf("1. Insert\n");
         printf("2. Search\n");
         printf("3. Delete\n");
@@ -2138,21 +2174,20 @@ int main() {
         scanf("%d", &choice);
 
         switch(choice) {
+        case 1:
+            printf("Enter value to insert: ");
+            scanf("%d", &val);
+            root = insert(root, val);
+            break;
 
-            case 1:
-                printf("Enter value to insert: ");
-                scanf("%d", &val);
-                root = insert(root, val);
-                break;
+        case 2:
+            printf("Enter value to search: ");
+            scanf("%d", &val);
 
-            case 2:
-                printf("Enter value to search: ");
-                scanf("%d", &val);
-
-                if(search(root, val))
-                    printf("Element found\n");
-                else
-                    printf("Element not found\n");
+            if (search(root, val))
+                printf("Element found");
+            else
+                    printf("Element not found");
 
                 break;
 
@@ -2165,19 +2200,19 @@ int main() {
             case 4:
                 printf("BST Inorder Traversal: ");
                 inorder(root);
-                printf("\n");
+                printf(" ");
                 break;
 
             case 5:
                 exit(0);
 
             default:
-                printf("Invalid choice\n");
+                printf("Invalid choice");
         }
     }
 }
 `);
 });
 app.listen(PORT, () => {
-console.log("DSA API running on port " + PORT);
+  console.log("DSA API running on port " + PORT);
 });
