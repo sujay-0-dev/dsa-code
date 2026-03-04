@@ -1727,7 +1727,7 @@ int main(){
 });
 
 /* Circular Queue Using Array */
-app.get("/circular-queue", (req, res) => {
+app.get("/queue-cl", (req, res) => {
 res.send(`
 #include <stdio.h>
 #include <stdlib.h>
